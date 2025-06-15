@@ -1,0 +1,52 @@
+services:
+  server_go:
+    #image: <user>/api-go:v1
+    container_name: api-go
+    build:
+      context: ./Monitoreo
+    pid: host
+    ports:
+      - "3000:3000"
+
+  server_node:
+    #image: <user>/api-node:v1
+    container_name: api-node
+    build:
+      context: ./Backend
+    ports:
+      - "5002:5002"
+    depends_on:
+      - server_go
+      - data_base
+
+  # Nombre de la imagen de React.
+  app-web:
+    #   image: <user>/app-web:v1
+    container_name: web-app
+    build:
+      context: ./Frontend/Web
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server_node
+
+  # Nombre de la imagen de MySql
+  data_base:
+    image: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=123 # Pass. del usario root.
+      - MYSQL_DATABASE=SOPES1 # DB a usar, si no existe la crea.
+      #- MYSQL_USER=root         # Usuario que se creara para la BD.
+      #- MYSQL_PASSWORD=root     # Contrasenia para el usuario de la BD.
+    volumes:
+      # Le decimos a docker que debe crear la base de datos con el script que se especifica.
+      - ./Backend/script.sql:/docker-entrypoint-initdb.d/database.sql
+      # Creamos un volumen y lo vinculamos para tener persistencia de datos, la ruta debe ser absoluta.
+      - /home/<user>/Escritorio/datos:/var/lib/mysql
+
+# Si se especifica un ruta no es necesaria esta parte, en caso contrario si es necesario.
+#volumes:
+#  almacen:
