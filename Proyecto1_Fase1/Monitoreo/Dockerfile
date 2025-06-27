@@ -1,22 +1,17 @@
-# Etapa 1: build
-FROM golang:1.24.3 AS builder
+FROM golang:latest AS builder
 
-WORKDIR /app
+WORKDIR /backend
 
 COPY go.mod go.sum ./
-RUN go mod download
+#RUN go mod download
 
 COPY . .
 
-RUN CGO_ENABLED=0 GOOS=linux go build -o docker-go
+# Fuerza el uso del proxy Go
+ENV GOPROXY=https://proxy.golang.org,direct
 
-# Etapa 2: runtime
-FROM alpine:latest
+RUN go build -o Main .
 
-RUN apk --no-cache add ca-certificates
+EXPOSE 3000
 
-COPY --from=builder /app/docker-go /docker-go
-
-EXPOSE 6000
-
-ENTRYPOINT ["/docker-go"]
+CMD ["./Main"]

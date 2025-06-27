@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # Install modules
-cd ~/Documentos/Monitor-Linux/Modulos/Ram
+cd ~/Documentos/SOPES1/Proyecto1_Fase1/SOPES_VAC2025_201612218_/Proyecto1_Fase1/Modulos/Ram
 make
 sudo insmod memoria.ko
 
-cd ~/Documentos/Monitor-Linux/Modulos/Cpu
+cd ~/Documentos/SOPES1/Proyecto1_Fase1/SOPES_VAC2025_201612218_/Proyecto1_Fase1/Modulos/Cpu
 make
 sudo insmod cpu.ko
 
@@ -22,7 +22,7 @@ done
 echo "! Modulos cargados exitosamente !"
 
 # Infraestructura
-cd ~/Documentos/Monitor-Linux
+cd ~/Documentos/SOPES1/Proyecto1_Fase1/SOPES_VAC2025_201612218_/Proyecto1_Fase1
 sudo docker compose up -d
 
 echo "! Infraestructura levantada correctamente !"

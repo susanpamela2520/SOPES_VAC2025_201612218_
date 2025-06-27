@@ -1,0 +1,1 @@
+savedcmd_/home/susanherrera/Documentos/SOPES1/Proyecto1_Fase1/SOPES_VAC2025_201612218_/Proyecto1_Fase1/Modulos/Cpu/modules.order := {   echo /home/susanherrera/Documentos/SOPES1/Proyecto1_Fase1/SOPES_VAC2025_201612218_/Proyecto1_Fase1/Modulos/Cpu/cpu.o; :; } > /home/susanherrera/Documentos/SOPES1/Proyecto1_Fase1/SOPES_VAC2025_201612218_/Proyecto1_Fase1/Modulos/Cpu/modules.order

@@ -1,14 +1,13 @@
-FROM node:24-alpine3.22
+FROM node:20-alpine
 
-WORKDIR /server
+WORKDIR /app
 
 COPY package*.json ./
-COPY package-lock.json ./
 
-RUN npm install
+RUN npm install --include=dev
 
 COPY . .
 
 EXPOSE 5002
 
-CMD [ "npm", "run", "dev" ]
+CMD [ "npm", "start"]
